@@ -47,13 +47,16 @@ fn main() -> Result<(), Box<dyn Error>> {
             String::from("no password given")
         }
     });
+    let filename_receivers = std::env::args()
+        .nth(4)
+        .unwrap_or_else(|| String::from("./contacts/test.csv"));
 
     // Parse the sender.
     println!("Try to parse given email address {}", smtp_username);
     let sender = smtp_username.parse::<Address>()?;
 
     // Load the list of the recipients.
-    let file = File::open("./contacts/test.csv")?;
+    let file = File::open(filename_receivers)?;
     let mut reader = csv::ReaderBuilder::new().delimiter(b';').from_reader(file);
     for result in reader.records() {
         let record = result?;
