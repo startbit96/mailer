@@ -1,6 +1,9 @@
 /target
 .direnv
 
+# The contact informations of the receivers should not be public.
+contacts/
+
 # Debug file sometimes used (cargo run 2>out)
 out
 
